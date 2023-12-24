@@ -1,3 +1,4 @@
+import AddToBag from "@/app/components/AddToBag";
 import ImageGallery from "@/app/components/ImageGallery";
 import { Button } from "@/app/components/ui/button";
 import { fullProduct } from "@/app/interface";
@@ -13,6 +14,7 @@ async function getData(slug: string) {
           description,
           "slug":slug.current,
           "categoryName": category->name,
+          price_id
           
       }`;
 
@@ -68,7 +70,16 @@ export default async function ProductPage({params} : {params: {slug: string}}) {
                             </div>
 
                             <div className="flex gap-2.5">
-                                <Button>Add To Bag</Button>
+                                <AddToBag 
+                                currency="USD" 
+                                description={data.description} 
+                                image={data.images[0]} 
+                                name={data.name} 
+                                price={data.price}
+                                key={data._id} 
+                                price_id={data.price_id}
+                                />
+                                
                                 <Button variant={"secondary"}>Checkout now</Button>
                             </div>
 
